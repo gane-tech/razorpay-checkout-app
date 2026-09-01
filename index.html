@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Store Checkout</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="product-card">
+        <h2>Premium UI/UX Course</h2>
+        <p>Master modern web design principles.</p>
+        <h3>₹499.00</h3>
+        <button id="rzp-button1">Pay Now with Razorpay</button>
+    </div>
+
+    <!-- This is Razorpay's official Checkout script -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        var options = {
+            // ADD YOUR KEY ID HERE
+            "key": "rzp_test_TWod5F0dHTRaV9", 
+            
+            // Amount is in paise (currency subunits). 49900 paise = ₹499
+            "amount": "49900", 
+            "currency": "INR",
+            "name": "Tech Store",
+            "description": "Course Purchase",
+            "image": "https://cdn-icons-png.flaticon.com/512/6062/6062646.png",
+            
+            // This function runs automatically when payment succeeds
+            "handler": function (response){
+                alert("Payment Successful!\nPayment ID: " + response.razorpay_payment_id);
+                // In a real app, you would send this ID to your database here
+            },
+            "prefill": {
+                "name": "Gauni Ganesh Reddy",
+                "email": "ganesh@example.com",
+                "contact": "9999999999"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        
+        // Initialize the Razorpay window
+        var rzp1 = new Razorpay(options);
+        
+        // Attach the click event to your button
+        document.getElementById('rzp-button1').onclick = function(e){
+            rzp1.open();
+            e.preventDefault();
+        }
+    </script>
+</body>
+</html>
